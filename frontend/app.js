@@ -34,7 +34,16 @@
     return [...fromApi.map(normalize), ...pending.filter(p => !ids.has(p.client_msg_id)).map(normalize)];
   }
   function markerIcon(level) {
-    return L.divIcon({className:'',html:`<div class="sos-div ${level}" aria-label="${level==='red'?'Red SOS urgent':'Yellow SOS need help'}">${level==='red'?'!':'⚠'}</div>`,iconSize:[30,30],iconAnchor:[15,15]});
+    const isRed = level === 'red';
+    const bg = isRed ? '#ff2255' : '#ffaa00';
+    const glow = isRed ? 'rgba(255,34,85,0.7)' : 'rgba(255,170,0,0.6)';
+    const symbol = isRed ? '!' : '▲';
+    return L.divIcon({
+      className: '',
+      html: `<div style="width:30px;height:30px;border-radius:50%;background:${bg};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:sans-serif;font-size:16px;box-shadow:0 0 16px ${glow};border:2px solid #fff;animation:beacon 1.5s infinite" aria-label="${isRed?'Red SOS critical':'Yellow SOS assist'}">${symbol}</div>`,
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
+    });
   }
   function initMap(id) {
     if (!window.L || !$(id)) return null;
