@@ -16,7 +16,7 @@ router = APIRouter(tags=["Zones & Population"])
 async def get_zones(
     bbox: Optional[str] = Query(None, description="min_lon,min_lat,max_lon,max_lat"),
     hazard: Optional[str] = Query("flood"),
-    format: str = Query("geojson", enum=["geojson", "list"]),
+    format: str = Query("geojson", pattern="^(geojson|list)$"),
     db: AsyncSession = Depends(get_db)
 ):
     """
