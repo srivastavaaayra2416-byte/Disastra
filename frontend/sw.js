@@ -1,4 +1,4 @@
-const CACHE = 'disastra-shell-v2';
+const CACHE = 'disastra-shell-v4';
 const CORE = ['./', './index.html', './app.css', './app.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));
